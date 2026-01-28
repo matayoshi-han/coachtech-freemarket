@@ -1,0 +1,82 @@
+.product-form__group {
+    width: 85%;
+    margin: 0 0 0 auto;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-form__item {
+    width: 30%;
+    box-shadow: 0px 0px 10px 0px #0000001A;
+    margin: 10px;
+    background-color: #ffffff;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #4B4B4B;
+}
+
+.product__heading-btn {
+    text-decoration: none;
+    color: #4B4B4B;
+    font-weight: 600;
+    font-family: "Hiragino Kaku Gothic Pro";
+}
+
+.product-form__item-list {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.form__content {
+    width: calc(100%-1rem-240px);
+    height: 790px;
+    display: flex;
+    gap: 1rem;
+}
+
+.search-form__name-input {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #E0DFDE;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.search-form__search-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 5px;
+    background-color: #F5C800;
+    box-shadow: 0px 4px 10px #0000001A;
+    border: none;
+}
+
+.select-form {
+    padding: 20px 0;
+}
+
+.select-form__header {
+    width: 120px;
+    height: 30px;
+    font-weight: 600;
+}
+
+.sort-select {
+    width: 100%;
+    height: 43px;
+    border-radius: 5px;
+    border: 1px solid #E0DFDE;
+    padding: 10px 11px;
+}
