@@ -11,6 +11,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::middleware('auth')->group(
     function () {
         Route::get('/', [ItemController::class, 'index'])->name('index');
+        Route::get('/item/{id}', [ItemController::class, 'show'])->name('items.show');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     }
 );

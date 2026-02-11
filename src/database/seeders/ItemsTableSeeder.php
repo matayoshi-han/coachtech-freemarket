@@ -17,8 +17,7 @@ class ItemsTableSeeder extends Seeder
         //
         $prams = [
             'id' => 1,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Armani+Mens+Clock.jpg',
             'item_state' => '良好',
             'item_name' => '腕時計',
             'item_brand' => 'Rolex',
@@ -31,8 +30,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 2,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/HDD+Hard+Disk.jpg',
             'item_state' => '目立った傷や汚れなし',
             'item_name' => 'HDD',
             'item_brand' => '西芝',
@@ -44,8 +42,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($prams);
         $prams = [
             'id' => 3,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/iLoveIMG+d.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/iLoveIMG+d.jpg',
             'item_state' => 'やや傷や汚れあり',
             'item_name' => '玉ねぎ３束',
             'item_brand' => 'なし',
@@ -58,8 +55,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 4,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Leather+Shoes+Product+Photo.jpg',
             'item_state' => '状態が悪い',
             'item_name' => '革靴',
             'item_brand' => null,
@@ -72,8 +68,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 5,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Living+Room+Laptop.jpg',
             'item_state' => '良好',
             'item_name' => 'ノートPC',
             'item_brand' => null,
@@ -86,8 +81,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 6,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Music+Mic+4632231.jpg',
             'item_state' => '目立った傷や汚れなし',
             'item_name' => 'マイク',
             'item_brand' => 'なし',
@@ -100,8 +94,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 7,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Purse+fashion+pocket.jpg',
             'item_state' => 'やや傷や汚れあり',
             'item_name' => 'ショルダーバッグ',
             'item_brand' => null,
@@ -114,8 +107,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 8,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Tumbler+souvenir.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Tumbler+souvenir.jpg',
             'item_state' => '状態が悪い',
             'item_name' => 'タンブラー',
             'item_brand' => 'なし',
@@ -128,8 +120,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 9,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/Waitress+with+Coffee+Grinder.jpg',
             'item_state' => '良好',
             'item_name' => 'コーヒーミル',
             'item_brand' => 'Starbucks',
@@ -142,8 +133,7 @@ class ItemsTableSeeder extends Seeder
 
         $prams = [
             'id' => 10,
-            'image_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg',
-            'category_id' => 1,
+            'image_url' => 'storage/外出メイクアップセット.jpg',
             'item_state' => '目立った傷や汚れなし',
             'item_name' => 'メイクセット',
             'item_brand' => null,

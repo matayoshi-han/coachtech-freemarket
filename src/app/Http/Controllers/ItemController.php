@@ -13,4 +13,11 @@ class ItemController extends Controller
         $items = Item::all();
         return view('index', compact('items'));
     }
+
+    //商品詳細を表示する
+    public function show($id)
+    {
+        $item = Item::findOrFail($id);
+        return view('show', compact('item'));
+    }
 }
