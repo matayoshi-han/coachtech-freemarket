@@ -44,6 +44,11 @@
         <div class="form__button">
             <button class="form__button-submit" type="submit">ログイン</button>
         </div>
+        <div class="form__error">
+            @error('login_error')
+            {{ $message }}
+            @enderror
+        </div>
     </form>
     <div class="register__link">
         <a class="register__button-submit" href="/register">会員登録の方はこちら</a>

@@ -18,8 +18,33 @@ class Item extends Model
         'item_amount',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_item');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function isLiked($user_id)
+    {
+        return $this->likes()->where('user_id', $user_id)->exists();
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    public function isSold()
+    {
+        return $this->order()->exists();
     }
 }

@@ -8,8 +8,8 @@
 @section('content')
 <div class="form__header">
     <div class="link">
-        <a href="/" class="product__heading-btn btn">おすすめ</a>
-        <a href="/">マイリスト</a>
+        <a href="/" class="product__heading-btn btn {{ request('tag') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
+        <a href="/?tag=mylist" class="product__heading-btn btn {{ request('tag') === 'mylist' ? 'active' : '' }}">マイリスト</a>
     </div>
 </div>
 <div class="form__content">
@@ -21,6 +21,9 @@
                 <div class="product-form__item-list">
                     <h4>{{ $item->item_name }}</h4>
                     <p>¥{{ $item->item_amount }}</p>
+                    @if($item->order)
+                    <div class="sold-tag">SOLD</div>
+                    @endif
                 </div>
             </a>
         </div>

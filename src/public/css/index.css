@@ -29,6 +29,12 @@ a {
     font-family: "Hiragino Kaku Gothic Pro";
 }
 
+.product__heading-btn.active {
+    color: #ff4b4b;
+    font-weight: bold;
+    border-bottom: 2px solid #ff4b4b;
+}
+
 .product-form__item-list {
     display: flex;
     justify-content: space-between;

@@ -25,7 +25,8 @@
                             <a class="header-nav__link" href="/mypage">マイページ</a>
                         </li>
                         <li class="header-nav__item">
-                            <form>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
                                 <button class="header-nav__button">ログアウト</button>
                             </form>
                         </li>
