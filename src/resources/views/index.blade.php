@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="form__header">
-    <div class="link">
+    <div class="form__header-link">
         <a href="/" class="product__heading-btn btn {{ request('tag') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
         <a href="/?tag=mylist" class="product__heading-btn btn {{ request('tag') === 'mylist' ? 'active' : '' }}">マイリスト</a>
     </div>
@@ -17,13 +17,14 @@
         @foreach($items as $item)
         <div class="product-form__item">
             <a href="/item/{{ $item->id }}">
-                <img src="{{ asset($item->image_url) }}" alt="{{ $item->item_name }}">
+                <div class="product-image-container">
+                    <img src="{{ asset($item->image_url) }}" alt="{{ $item->item_name }}">
+                    @if($item->order)
+                    <div class="sold-label">Sold</div>
+                    @endif
+                </div>
                 <div class="product-form__item-list">
                     <h4>{{ $item->item_name }}</h4>
-                    <p>¥{{ $item->item_amount }}</p>
-                    @if($item->order)
-                    <div class="sold-tag">SOLD</div>
-                    @endif
                 </div>
             </a>
         </div>

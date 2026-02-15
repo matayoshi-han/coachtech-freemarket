@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Models\Item;
 use App\Models\Order;
 
@@ -52,13 +54,10 @@ class ItemController extends Controller
     }
 
     //コメントを送信する
-    public function storeComment(Request $request, $id)
+    public function storeComment(CommentRequest $request, $id)
     {
-    $request->validate([
-        'text' => 'required|max:255',
-    ]);
-
     $item = Item::findOrFail($id);
+
     $item->comments()->create([
         'comment_text' => $request->text,
         'user_id' => auth()->id(),
@@ -91,4 +90,35 @@ class ItemController extends Controller
 
         return redirect('/')->with('message', '購入が完了しました');
     }
+
+    //出品画面を表示する
+    public function create()
+    {
+        $categories = \App\Models\Category::all();
+        return view('sell', compact('categories'));
+    }
+
+    //出品を保存する
+    public function store(ExhibitionRequest $request)
+    {
+        $path = $request->file('image')->store('items', 'public');
+
+        $imagePath = 'storage/' . $path;
+
+        $item = Item::create([
+            'user_id' => auth()->id(),
+            'image_url' => $imagePath,
+            'item_state' => $request->condition,
+            'item_name' => $request->item_name,
+            'item_brand' => $request->brand_name,
+            'item_description' => $request->item_description,
+            'item_amount' => $request->item_amount,
+        ]);
+
+        $item->categories()->sync($request->categories);
+
+        return redirect('/')->with('message', '商品を出品しました');
+    }
+
+
 }

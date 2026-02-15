@@ -31,7 +31,7 @@
                             </form>
                         </li>
                         <li class="header-nav__item">
-                            <a class="header-nav__link" href="/sell">出品</a>
+                            <a class="header-nav__link sale" href="/sell">出品</a>
 
                         </li>
                         @endif

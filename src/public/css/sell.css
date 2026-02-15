@@ -1,0 +1,169 @@
+.sell__content {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.sell__header {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.sell__section {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.sell__sub-heading {
+    font-size: 30px;
+    font-weight: bold;
+    color: #5F5F5F;
+    border-bottom: 1px solid #5F5F5F;
+    margin-bottom: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.sell__label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #000000;
+}
+
+.sell__group {
+    margin-bottom: 20px;
+}
+
+.sell__input,
+.sell__select,
+.sell__textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.sell__textarea {
+    resize: vertical;
+}
+
+.sell__image-upload-container {
+    padding: 50px 0 11px 0;
+    border: 1px dashed #5F5F5F;
+    border-radius: 4px;
+    text-align: center;
+    align-items: center;
+}
+
+.sell__image-input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sell__image-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 2px solid #FF5655;
+    border-radius: 10px;
+    color: #FF5655;
+    background-color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.sell__image-btn:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.sell__category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item input[type="checkbox"] {
+    display: none;
+}
+
+.category-item label {
+    display: inline-block;
+    padding: 6px 15px;
+    border: 2px solid #FF5655;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+    color: #FF5655;
+}
+
+.category-item input[type="checkbox"]:checked+label {
+    background-color: #FF5655;
+    color: #FFFFFF;
+    border-color: #FF5655;
+}
+
+.price-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.currency-unit {
+    position: absolute;
+    left: 12px;
+    font-size: 18px;
+    color: #333;
+}
+
+.price-input-container .sell__input {
+    padding-left: 35px;
+}
+
+.sell__error {
+    color: #FF5555;
+    font-size: 14px;
+    margin-top: 5px;
+    height: 20px;
+}
+
+.sell__actions {
+    margin-top: 40px;
+}
+
+.sell__submit-btn {
+    width: 100%;
+    background-color: #FF5555;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    font-size: 26px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sell__submit-btn:hover {
+    background-color: #e63e3e;
+}
+
+@media (max-width: 480px) {
+    .sell__content {
+        margin: 20px auto;
+    }
+}
