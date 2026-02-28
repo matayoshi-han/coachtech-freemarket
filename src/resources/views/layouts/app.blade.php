@@ -18,6 +18,15 @@
                 <a class="header__logo" href="/">
                     <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" alt="ロゴ">
                 </a>
+                @if (!Route::is('login') && !Route::is('register'))
+                <div class="header__search">
+                    <form action="{{ route('index') }}" method="GET">
+                        <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                    </form>
+                </div>
+                @else
+                <div class="header__search-spacer" style="flex: 1;"></div>
+                @endif
                 <nav>
                     <ul class="header-nav">
                         @if (Auth::check())

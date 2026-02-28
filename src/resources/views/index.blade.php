@@ -8,8 +8,14 @@
 @section('content')
 <div class="form__header">
     <div class="form__header-link">
-        <a href="/" class="product__heading-btn btn {{ request('tag') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
-        <a href="/?tag=mylist" class="product__heading-btn btn {{ request('tag') === 'mylist' ? 'active' : '' }}">マイリスト</a>
+        <a href="/?keyword={{ request('keyword') }}"
+            class="product__heading-btn btn {{ request('tag') !== 'mylist' ? 'active' : '' }}">
+            おすすめ
+        </a>
+        <a href="/?tag=mylist&keyword={{ request('keyword') }}"
+            class="product__heading-btn btn {{ request('tag') === 'mylist' ? 'active' : '' }}">
+            マイリスト
+        </a>
     </div>
 </div>
 <div class="form__content">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\AddressRequest;
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
 use App\Models\Order;
 
@@ -13,20 +15,33 @@ class ItemController extends Controller
     //商品一覧を表示する
     public function index(Request $request)
     {
-        //マイリストを表示する場合
-        if ($request->query('tag') === 'mylist') {
-            if (auth()->check()) {
-                $items = Item::whereHas('likes', function ($q) {
-                    $q->where('user_id', auth()->id());
-                })->get();
-            } else {
-                $items = collect();
-            }
-        } else {
-            //おすすめ商品を表示する場合
-            $items = Item::all();
+        $keyword = $request->query('keyword');
+        $tag = $request->query('tag');
+
+        $query = Item::query();
+
+        if (auth()->check()) {
+            $query->where('user_id', '!=', auth()->id());
         }
 
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('item_name', 'LIKE', "%{$keyword}%")
+                    ->orWhere('item_brand', 'LIKE', "%{$keyword}%");
+            });
+        }
+
+        if ($tag === 'mylist') {
+            if (auth()->check()) {
+                $query->whereHas('likes', function ($q) {
+                    $q->where('user_id', auth()->id());
+                });
+            } else {
+                return view('index', ['items' => collect()]);
+            }
+        }
+
+        $items = $query->get();
         return view('index', compact('items'));
     }
 
@@ -69,26 +84,54 @@ class ItemController extends Controller
     public function purchase($id)
     {
         $item = Item::findOrFail($id);
+        $user = auth()->user();
 
-        return view('purchase', compact('item'));
+        return view('purchase', compact('item', 'user'));
     }
 
     //購入を完了する
-    public function storeOrder(Request $request, $id)
+    public function storeOrder(PurchaseRequest $request, $id)
     {
         $item = Item::findOrFail($id);
+
+        if ($item->order) {
+            return back()->withErrors(['error' => 'この商品はすでに売り切れです。']);
+        }
 
         Order::create([
             'user_id' => auth()->id(),
             'item_id' => $item->id,
             'price' => $item->item_amount,
             'payment_method' => $request->payment_method,
-            'shipping_postal_code' => $request->postal_code,
-            'shipping_address' => $request->address,
-            'shipping_building' => $request->building,
+            'shipping_postal_code' => $request->shipping_postal_code,
+            'shipping_address' => $request->shipping_address,
+            'shipping_building' => $request->shipping_building,
         ]);
 
         return redirect('/')->with('message', '購入が完了しました');
+    }
+
+    // 住所変更画面を表示
+    public function editAddress($id)
+    {
+        $item = Item::findOrFail($id);
+        $user = auth()->user();
+        return view('address', compact('item', 'user'));
+    }
+
+    // 住所を更新して購入画面に戻る
+    public function updateAddress(AddressRequest $request, $id)
+    {
+
+        $user = \App\Models\User::find(auth()->id());
+
+        $user->update([
+            'postal_code' => $request->postal_code,
+            'address'     => $request->address,
+            'building'    => $request->building,
+        ]);
+
+        return redirect()->route('items.purchase', ['id' => $id]);
     }
 
     //出品画面を表示する

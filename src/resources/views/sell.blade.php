@@ -14,12 +14,42 @@
         @csrf
         <div class="sell__section">
             <label class="sell__label">商品画像</label>
-            <div class="sell__image-upload-container">
+            <div id="upload-container" class="sell__image-upload-container">
+                <div id="image-preview" class="sell__image-preview">
                 <input type="file" name="image" id="image" accept="image/*" class="sell__image-input">
-                <label for="image" class="sell__image-btn">画像を選択する</label>
-                <p class="sell__error">@error('image') {{ $message }} @enderror</p>
+                <label for="image" id="image-label" class="sell__image-btn">画像を選択する</label>
+                <p class="sell__error" id="error-message">@error('image') {{ $message }} @enderror</p>
             </div>
         </div>
+
+        <script>
+            document.getElementById('image').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const preview = document.getElementById('image-preview');
+                const container = document.getElementById('upload-container');
+                const label = document.getElementById('image-label');
+                const error = document.getElementById('error-message');
+                const reader = new FileReader();
+
+                if (file) {
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="プレビュー">`;
+
+                        // 1. 画像がある時用のクラスを追加
+                        container.classList.add('has-image');
+                        // 2. ボタンを隠す
+                        label.style.display = 'none';
+                        // 3. エラー表示を消す
+                        if (error) error.style.display = 'none';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('image-preview').addEventListener('click', function() {
+                document.getElementById('image').click();
+            });
+        </script>
 
         <div class="sell__section">
             <h3 class="sell__sub-heading">商品の詳細</h3>

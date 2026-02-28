@@ -53,23 +53,36 @@
     resize: vertical;
 }
 
+.sell__image-preview {
+    margin: 0;
+}
+
 .sell__image-upload-container {
-    padding: 50px 0 11px 0;
-    border: 1px dashed #5F5F5F;
-    border-radius: 4px;
+    border: 2px dashed #ccc;
+    padding: 40px;
     text-align: center;
-    align-items: center;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.sell__image-upload-container.has-image {
+    padding: 0;
+    border: 2px dashed #fafafa;
+    background-color: transparent;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.sell__image-preview img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
 }
 
 .sell__image-input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    cursor: pointer;
+    display: none;
 }
 
 .sell__image-btn {

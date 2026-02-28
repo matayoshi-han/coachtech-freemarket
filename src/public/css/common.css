@@ -1,9 +1,15 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .header {
     background: #000;
+    width: 100%;
 }
 
 .header__inner {
-    margin: 0 40px;
+    margin: 0 clamp(10px, 3vw, 40px);
     padding: 20px 15px;
 }
 
@@ -11,60 +17,85 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: clamp(5px, 2vw, 40px);
 }
 
 .header__logo {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+}
+
+.header__logo img {
+    width: clamp(120px, 18vw, 370px);
+    height: auto;
+    display: block;
+}
+
+.header__search {
+    flex-grow: 1;
+    max-width: 800px;
+    min-width: 50px;
+    margin: 0 10px;
+}
+
+.header__search-spacer {
+    flex: 1;
+}
+
+.header__search input {
+    width: 100%;
+    padding: 10px clamp(5px, 1vw, 15px);
+    border-radius: 4px;
+    border: none;
+    background-color: #fff;
+    font-size: clamp(10px, 1.2vw, 16px);
+    outline: none;
+    box-sizing: border-box;
 }
 
 .header-utilities nav {
-    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
+    flex-shrink: 0;
 }
 
 .header-nav {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: clamp(5px, 1.5vw, 30px);
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.header-nav__item {
-    list-style: none;
-
-}
-
-.header-nav__link {
+.header-nav__link,
+.header-nav__button {
     color: #fff;
     text-decoration: none;
-    font-size: 24px;
-    font-weight: 400px;
+    font-size: clamp(10px, 1.8vw, 24px);
+    font-weight: 400;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .header-nav__link.sale {
     background-color: #ffffff;
     color: #000000;
-    padding: 5px 20px;
+    padding: 0.2em 0.8em;
     border-radius: 4px;
-    font-weight: 400px;
     display: inline-block;
 }
 
-.header-nav__button {
-    border: none;
-    background: transparent;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-}
+@media screen and (max-width: 375px) {
+    .header__inner {
+        padding: 15px 5px;
+    }
 
-a {
-    text-decoration: none;
-    color: inherit;
+    .header__logo img {
+        width: 100px;
+    }
 }
