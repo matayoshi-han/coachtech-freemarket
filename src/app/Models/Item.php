@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'item_id',
+        'user_id',
         'image_url',
         'item_state',
         'item_name',

@@ -64,6 +64,7 @@ class AuthController extends Controller
                 $q->where('user_id', $user->id);
             })->get();
         } else {
+
             $items = Item::where('user_id', $user->id)->get();
         }
 

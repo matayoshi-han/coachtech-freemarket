@@ -12,53 +12,27 @@
 
     <form action="/sell" method="POST" enctype="multipart/form-data" class="sell__form">
         @csrf
+
         <div class="sell__section">
             <label class="sell__label">商品画像</label>
             <div id="upload-container" class="sell__image-upload-container">
                 <div id="image-preview" class="sell__image-preview">
-                <input type="file" name="image" id="image" accept="image/*" class="sell__image-input">
+                    <!-- 画像プレビューがここに挿入される -->
+                </div>
+                <input type="file" name="image" id="image" accept="image/*" class="sell__image-input" style="display:none;">
                 <label for="image" id="image-label" class="sell__image-btn">画像を選択する</label>
                 <p class="sell__error" id="error-message">@error('image') {{ $message }} @enderror</p>
             </div>
         </div>
 
-        <script>
-            document.getElementById('image').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                const preview = document.getElementById('image-preview');
-                const container = document.getElementById('upload-container');
-                const label = document.getElementById('image-label');
-                const error = document.getElementById('error-message');
-                const reader = new FileReader();
-
-                if (file) {
-                    reader.onload = function(e) {
-                        preview.innerHTML = `<img src="${e.target.result}" alt="プレビュー">`;
-
-                        // 1. 画像がある時用のクラスを追加
-                        container.classList.add('has-image');
-                        // 2. ボタンを隠す
-                        label.style.display = 'none';
-                        // 3. エラー表示を消す
-                        if (error) error.style.display = 'none';
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            document.getElementById('image-preview').addEventListener('click', function() {
-                document.getElementById('image').click();
-            });
-        </script>
-
         <div class="sell__section">
             <h3 class="sell__sub-heading">商品の詳細</h3>
             <div class="sell__group">
-                <label for="categories" class="sell__label">カテゴリー</label>
+                <label class="sell__label">カテゴリー</label>
                 <div class="sell__category-list">
                     @foreach($categories as $category)
                     <div class="category-item">
-                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" id="cat-{{ $category->id }}">
+                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" id="cat-{{ $category->id }}" {{ is_array(old('categories')) && in_array($category->id, old('categories')) ? 'checked' : '' }}>
                         <label for="cat-{{ $category->id }}">{{ $category->category_name }}</label>
                     </div>
                     @endforeach
@@ -70,10 +44,9 @@
                 <label for="condition" class="sell__label">商品の状態</label>
                 <select name="condition" id="condition" class="sell__select">
                     <option value="" disabled selected>選択してください</option>
-                    <option value="良好">良好</option>
-                    <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
-                    <option value="やや傷や汚れあり">やや傷や汚れあり</option>
-                    <option value="状態が悪い">状態が悪い</option>
+                    @foreach(['良好', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'] as $cond)
+                    <option value="{{ $cond }}" {{ old('condition') == $cond ? 'selected' : '' }}>{{ $cond }}</option>
+                    @endforeach
                 </select>
                 <p class="sell__error">@error('condition') {{ $message }} @enderror</p>
             </div>
@@ -117,4 +90,31 @@
         </div>
     </form>
 </div>
+
+<script>
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('image-preview');
+    const container = document.getElementById('upload-container');
+    const label = document.getElementById('image-label');
+    const error = document.getElementById('error-message');
+
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // プレビュー表示
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="プレビュー" style="max-width:100%; cursor:pointer;">`;
+                // スタイル変更
+                container.classList.add('has-image');
+                label.style.display = 'none';
+                if (error) error.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // プレビュー画像をクリックしてもファイル選択し直せるようにする
+    imagePreview.addEventListener('click', () => imageInput.click());
+</script>
 @endsection
