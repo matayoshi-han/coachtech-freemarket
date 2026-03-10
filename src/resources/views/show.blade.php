@@ -9,11 +9,13 @@
     <div class="item-detail__image">
         <img src="{{ asset($item->image_url) }}" alt="{{ $item->item_name }}">
     </div>
+
     <div class="item-detail__info-area">
         <div class="item-detail__info">
             <h2>{{ $item->item_name }}</h2>
             <p>{{ $item->item_brand ?? '' }}</p>
             <p class="item-detail__price">¥{{ number_format($item->item_amount) }}（税込）</p>
+
             <div class="item-detail__actions">
                 <div class="action-item">
                     <form action="/like/{{ $item->id }}" method="POST">
@@ -32,11 +34,13 @@
                     <div class="icon-button">
                         <img src="{{ asset('images/ふきだしロゴ.png') }}" alt="コメント">
                     </div>
-                    <span class="action-count">{{ count($item->comments) }}</span>
+                    <span class="action-count">{{ $item->comments->count() }}</span>
                 </div>
             </div>
         </div>
+
         <a class="btn" href="/purchase/{{ $item->id }}">購入手続きへ</a>
+
         <div class="item-detail__description">
             <h3>商品説明</h3>
             <p>{{ $item->item_description }}</p>
@@ -52,30 +56,33 @@
                 <p>{{ $item->item_state }}</p>
             </div>
         </div>
+
         <div class="item-detail__comment">
-            <h3>コメント ({{ count($item->comments) }})</h3>
-            @if($item->comments->count() > 0)
+            <h3>コメント ({{ $item->comments->count() }})</h3>
             @foreach ($item->comments as $comment)
             <div class="comment-item">
                 <div class="comment-user">
                     <div class="comment-user__icon">
-                        <img src="{{ asset($comment->user->profile_image ?? '') }}" alt="user-icon">
+                        @if($comment->user->profile_image)
+                        <img src="{{ asset($comment->user->profile_image) }}" alt="user-icon">
+                        @else
+                        <div class="user-info__image-default"></div>
+                        @endif
                     </div>
-                    <span class="comment-user__name">{{ $comment->user->name }}</span>
+                    <span class="comment-user__name">{{ $comment->user->user_name ?? $comment->user->name }}</span>
                 </div>
                 <div class="comment-text-box">
                     <p class="comment-text">{{ $comment->comment_text }}</p>
                 </div>
             </div>
             @endforeach
-            @else
-            <p class="comment-text">まだコメントはありません。</p>
-            @endif
-            <form action="/comment/{{ $item->id }}" method="POST">
+
+            <form action="/comment/{{ $item->id }}" method="POST" class="comment-form">
                 @csrf
-                <textarea name="text" rows="4" cols="50"></textarea>
-                <button class="btn" type="submit">コメントを送信する</button>
+                <textarea name="comment_text" rows="4" class="comment-textarea"></textarea>
+                <button class="btn comment-submit-btn" type="submit">コメントを送信する</button>
             </form>
         </div>
     </div>
-    @endsection
+</div>
+@endsection

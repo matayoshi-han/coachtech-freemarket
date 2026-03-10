@@ -74,7 +74,7 @@ class ItemController extends Controller
     $item = Item::findOrFail($id);
 
     $item->comments()->create([
-        'comment_text' => $request->text,
+        'comment_text' => $request->comment_text,
         'user_id' => auth()->id(),
     ]);
     return back()->with('message', 'コメントを投稿しました');
