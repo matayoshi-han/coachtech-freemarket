@@ -27,6 +27,10 @@ DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
 ```
 5. アプリケーションキーの作成
 ``` bash
@@ -59,3 +63,4 @@ php artisan storage:link
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:：http://localhost:8080/
+- MailHog（メール確認）：http://localhost:8025/
