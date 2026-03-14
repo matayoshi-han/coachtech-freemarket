@@ -79,7 +79,10 @@
 
             <form action="/comment/{{ $item->id }}" method="POST" class="comment-form">
                 @csrf
-                <textarea name="comment_text" rows="4" class="comment-textarea"></textarea>
+                <textarea name="comment_text" rows="4" class="comment-textarea">{{ old('comment_text') }}</textarea>
+                @error('comment_text')
+                <p class="form__error" style="color: red; font-size: 14px; margin-top: 5px;">{{ $message }}</p>
+                @enderror
                 <button class="btn comment-submit-btn" type="submit">コメントを送信する</button>
             </form>
         </div>

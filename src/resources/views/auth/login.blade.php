@@ -26,6 +26,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">パスワード</span>
@@ -41,15 +42,19 @@
                 </div>
             </div>
         </div>
-        <div class="form__button">
-            <button class="form__button-submit" type="submit">ログイン</button>
-        </div>
-        <div class="form__error">
+
+        {{-- ボタンの上に移動 --}}
+        <div class="form__error--main">
             @error('login_error')
             {{ $message }}
             @enderror
         </div>
+
+        <div class="form__button">
+            <button class="form__button-submit" type="submit">ログイン</button>
+        </div>
     </form>
+
     <div class="register__link">
         <a class="register__button-submit" href="/register">会員登録の方はこちら</a>
     </div>
