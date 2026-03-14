@@ -18,15 +18,13 @@
                 <a class="header__logo" href="/">
                     <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" alt="ロゴ">
                 </a>
-                @if (!Route::is('login') && !Route::is('register'))
+                @if (!Route::is(['login', 'register', 'verification.notice']))
                 <div class="header__search">
                     <form action="{{ route('index') }}" method="GET">
                         <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
                     </form>
                 </div>
-                @else
-                <div class="header__search-spacer" style="flex: 1;"></div>
-                @endif
+
                 <nav>
                     <ul class="header-nav">
                         @if (Auth::check())
@@ -41,11 +39,22 @@
                         </li>
                         <li class="header-nav__item">
                             <a class="header-nav__link sale" href="/sell">出品</a>
-
+                        </li>
+                        @else
+                        <li class="header-nav__item">
+                            <a class="header-nav__link" href="/login">ログイン</a>
+                        </li>
+                        <li class="header-nav__item">
+                            <a class="header-nav__link" href="/register">会員登録</a>
                         </li>
                         @endif
                     </ul>
                 </nav>
+
+                @else
+                <div class="header__search-spacer" style="flex: 1;"></div>
+                @endif
+
             </div>
         </div>
     </header>
