@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use App\Models\Item;
 
@@ -28,8 +29,12 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
+
+        event(new Registered($user));
+
         Auth::login($user);
-        return redirect('/mypage/profile');
+
+        return redirect()->route('verification.notice');
     }
 
     //ログイン画面の表示
