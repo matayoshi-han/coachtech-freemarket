@@ -52,6 +52,12 @@ php artisan db:seed
 php artisan storage:link
 ```
 
+## テストの実行方法
+1. テスト用データベースの作成（初回のみ）
+   `docker-compose exec mysql mysql -u root -p -e "CREATE DATABASE laravel_test_db;"`
+2. テストの実行
+   `docker-compose exec php php artisan test`
+
 ## 使用技術(実行環境)
 - PHP8.3.0
 - Laravel8.83.27

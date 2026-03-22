@@ -57,7 +57,6 @@
     display: flex;
     gap: 25px;
     margin: 20px 0;
-    border-bottom: 1px solid #eee;
     padding-bottom: 20px;
 }
 
@@ -177,6 +176,7 @@
     font-size: 16px;
     color: #333;
     padding-top: 4px;
+    margin-left: 20px;
 }
 
 .item-detail__comment h3 {
@@ -221,7 +221,7 @@
 }
 
 .comment-text-box {
-    padding: 5px;
+    padding: 15px;
     background-color: #E5E5E5;
     border-radius: 4px;
     margin-left: 0;
@@ -232,10 +232,10 @@
 }
 
 .comment-text {
-    font-size: 15px;
-    font-weight: normal;
+    font-size: 20px;
+    font-weight: 300;
     margin: 0;
-    color: #333;
+    color: #000000;
 }
 
 .comment-form {
@@ -260,6 +260,7 @@
 
 textarea{
     width: 100%;
+    height: 200px;
 }
 
 @media (max-width: 768px) {

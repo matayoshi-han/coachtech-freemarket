@@ -46,13 +46,13 @@
             <p>{{ $item->item_description }}</p>
             <h3>商品の情報</h3>
             <div class="item-detail__description-category">
-                <h4>カテゴリー:</h4>
+                <h4>カテゴリー</h4>
                 @foreach($item->categories as $category)
                 <span class="category-tag">{{ $category->category_name }}</span>
                 @endforeach
             </div>
             <div class="item-detail__description-state">
-                <h4>商品の状態:</h4>
+                <h4>商品の状態</h4>
                 <p>{{ $item->item_state }}</p>
             </div>
         </div>

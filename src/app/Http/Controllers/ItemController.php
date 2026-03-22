@@ -9,6 +9,8 @@ use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
 use App\Models\Order;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class ItemController extends Controller
 {
@@ -94,10 +96,31 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
+        // すでに売却済みかチェック
         if ($item->order) {
             return back()->withErrors(['error' => 'この商品はすでに売り切れです。']);
         }
 
+        // --- Stripe決済処理 ---
+        if ($request->payment_method === 'credit_card') {
+            try {
+                // .envからシークレットキーをセット
+                Stripe::setApiKey(env('STRIPE_SECRET'));
+
+                // 決済実行
+                Charge::create([
+                    'amount' => $item->item_amount,
+                    'currency' => 'jpy',
+                    'source' => $request->stripeToken, // JSから渡されたトークン
+                    'description' => "商品名: {$item->item_name}",
+                ]);
+            } catch (\Exception $e) {
+                // 決済エラー時は購入画面に戻す
+                return back()->withErrors(['payment_method' => '決済に失敗しました：' . $e->getMessage()])->withInput();
+            }
+        }
+
+        // --- DB保存（決済成功、またはコンビニ払い時） ---
         Order::create([
             'user_id' => auth()->id(),
             'item_id' => $item->id,

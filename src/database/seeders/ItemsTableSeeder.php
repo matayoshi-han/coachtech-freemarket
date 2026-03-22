@@ -17,7 +17,7 @@ class ItemsTableSeeder extends Seeder
                 'item_state' => '良好',
                 'item_name' => '腕時計',
                 'item_brand' => 'Rolex',
-                'item_description' => 'スタイリッシュなデザインのメンズ腕時計。',
+                'item_description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'item_amount' => 15000,
             ],
             [
